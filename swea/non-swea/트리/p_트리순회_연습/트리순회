@@ -1,0 +1,14 @@
+이진 트리의 순회 기본
+                          A
+                     /        \
+                    B          c
+                  /    \      /  \
+                 D      E    F    G
+               /  \    /      \  / \
+              H    I  J        K L  M
+
+1. 전위 순회: VLR : A B DHI EJ C F K G LM
+2. 중위 순회: LVR : HDI B JE A FK C LGM
+3. 후위 순회: LRV : HID JE B KF LMG C A
+
+
