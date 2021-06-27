@@ -8,7 +8,7 @@ class ArticleTest(TestCase):
     def setUp(self):
         User = get_user_model()
         user = User.objects.create_user(username='test', password='123')
-        Article.objects.create(title='hello', user=user)
+        Article.objects.create(title='hello', content='content', user=user)
 
     def test_article_title(self):
         article = Article.objects.get(pk=1)
@@ -18,34 +18,23 @@ class ArticleTest(TestCase):
         c = Client()
         # 0. 로그인 확인
         res = c.get('/articles/create/')
-        self.assertEqual(res.status_code, 302)
+        self.assertEqual(res.status_code, 200)
         
         # 1. /articles/create/ 로 GET요청
-        c.login(username='test', password='123')
+        # 200 OK
+        c.login(username='admin', password='admin')
         res = c.get('/articles/create/')
         self.assertEqual(res.status_code, 200)
-        self.assertTemplateUsed(res, 'articles/article_form.html')
-        self.assertContains(res, '<h1>form</h1>')
 
         # 2. /articles/create/ 로 POST요청 (invalid)
+        # 400 bad request 에러 발생
         res = c.post('/articles/create/')
-        self.assertContains(res, 'This field is required.')
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.status_code, 400)
         
         # 3. /articles/create/ 로 POST요청 (valid)
+        # 201 create 
         before = Article.objects.last()
-        res = c.post('/articles/create/', {'title': 'hi'})
+        res = c.post('/articles/create/', {'title': 'hi', 'content': 'content', 'user': '1'})
         after = Article.objects.last()
-        self.assertEqual(res.status_code, 302)
-        self.assertEqual(res.url, '/articles/2/')
+        self.assertEqual(res.status_code, 201)
         self.assertNotEqual(before, after)
-
-
-    def test_article_list(self):
-        c = Client()
-        res = c.get('/articles/')
-        context_articles = res.context.get('articles')
-        queryset_articles = Article.objects.all()
-
-        self.assertEqual(list(context_articles), list(queryset_articles))
-        self.assertTemplateUsed(res, 'articles/article_list.html')
