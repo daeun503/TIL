@@ -15,7 +15,7 @@
 
 2. 메모리(기억장치)의 계층구조
 
-   <img src="chap8 메모리 관리.assets/image-20210829041317427.png" alt="image-20210829041317427" style="zoom:67%;" />
+   <img src="chap8 연속 메모리 할당.assets/image-20210829041317427.png" alt="image-20210829041317427" style="zoom:67%;" />
 
    - Block : 보조기억장치와 주기억장치 사이의 데이터 전송 단위. Size: 1~4KB
    - Word : 주기억장치와 레지스터 사이의 데이터 전송 단위. Size: 16~64bits
@@ -42,7 +42,7 @@
        - HW의 도움이 필요 : MMU (Memory Management Unit)
        - 대부분의 OS가 사용
 
-     <img src="chap8 메모리 관리.assets/image-20210829040513784.png" alt="image-20210829040513784" style="zoom: 67%;" />
+     <img src="chap8 연속 메모리 할당.assets/image-20210829040513784.png" alt="image-20210829040513784" style="zoom: 67%;" />
 
    <br/>
 
@@ -115,11 +115,11 @@
 
      - 해결법1 - Coalescing holes (공간 통합) : process가 memory를 release하고 나가면, **인접한 빈 영역을 하나의 partiton으로 통합** 해서 process를 할당한다. 낮은 오버헤드
 
-       <img src="chap8 메모리 관리.assets/image-20210829044936640.png" alt="image-20210829044936640" style="zoom:67%;" />
+       <img src="chap8 연속 메모리 할당.assets/image-20210829044936640.png" alt="image-20210829044936640" style="zoom:67%;" />
 
      - 해결법2 - Storage Compaction (메모리 압축) : 실행하고 있는 process를 모두 중지하고, **memory를 재배치해서 빈 공간을 하나로 통합**한다. 높은 오버헤드, 많은 시스템 자원 소비
 
-       <img src="chap8 메모리 관리.assets/image-20210829044955829.png" alt="image-20210829044955829" style="zoom:67%;" />
+       <img src="chap8 연속 메모리 할당.assets/image-20210829044955829.png" alt="image-20210829044955829" style="zoom:67%;" />
 
    - 배치 전략 (Placement strategies)
 
