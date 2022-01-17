@@ -16,8 +16,11 @@ def add_two_people(target, end):
             p1 += 1
         # target 이면 카운트
         else:
+            # p1, p2가 가리키는 값이 같을 때
             if IN[p1] == IN[p2]:
                 result += p2 - p1
+
+            # p1, p2가 가리키는 값이 다를 때
             else:
                 # 이 if 문이 있어야 시간이 줄어든다
                 if tmp > p2:
@@ -29,6 +32,7 @@ def add_two_people(target, end):
 
     return result
 
+
 N = int(input())
 IN = sorted(list(map(int, input().split())))
 
@@ -37,10 +41,8 @@ if N < 3:
     print(0)
     exit()
 
-p1, p2, p3 = 0, 1, N-1
-result, flag = 0, 1
-while p3 > 1:
+result = 0
+for p3 in range(N-1, 1, -1):
     result += add_two_people(-IN[p3], p3)
-    p3 -= 1
 
 print(result)
