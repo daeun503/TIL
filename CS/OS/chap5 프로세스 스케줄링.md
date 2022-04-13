@@ -126,7 +126,7 @@
 
 4. SRTN (Shortest Remaining Time Next) : SPN 변형
 
-   - Non-preemptive scheduling : 잔여 실행 시간이 더 적은 프로세스가 ready 상태가 되면 선점
+   - preemptive scheduling : 잔여 실행 시간이 더 적은 프로세스가 ready 상태가 되면 선점
    - 장) SPN의 장점 극대화
    - 단) 프로세스 생성시 총 실행 시간 예측이 필요. 잔여 실행 시간을 계속 추적해야 함(overhead), context switching overhead => 구현 및 사용이 비현실적
 
