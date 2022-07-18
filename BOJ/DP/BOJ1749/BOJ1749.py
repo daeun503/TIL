@@ -5,6 +5,7 @@ sys.stdin = open('input.txt')
 N, M = map(int, input().split())
 matrix = [list(map(int, input().split())) for _ in range(N)]
 
+# (0, 0) ~ (r, c) 행렬의 합 구해서 result[r][c]에 넣기
 result = [[0] * M for _ in range(N)]
 for r in range(N):
     for c in range(M):
@@ -12,6 +13,7 @@ for r in range(N):
                         (r > 0 and result[r-1][c]) + (c > 0 and result[r][c-1]) - \
                         (r > 0 and c > 0 and result[r-1][c-1])
 
+# (x1, y1) ~ (x2, y2) 행렬의 합 구하기
 ans = -9999999999999
 for x1 in range(N):
     for y1 in range(M):
