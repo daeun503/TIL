@@ -1,0 +1,51 @@
+# import sys
+# sys.stdin = open("input.txt", "r")
+
+dr = [-1, 1, 0, 0]
+dc = [0, 0, -1, 1]
+
+def dfs(route, Y_member):
+    global result
+
+    # 가지 치기 => 임도연 파가 4명 이상되면 X
+    if Y_member >= 4:
+        return
+
+    # route를 저장해두고, 이미 방문한 경우면 return
+    tuple_route = tuple(sorted(route))
+    if tuple_route in route_check:
+        return
+    else:
+        route_check.add(tuple_route)
+
+    # 종료 => 7명을 모두 픽했으면 종료
+    if len(route) == 7:
+        result += 1
+        return
+
+    # 재귀
+    # 모든 route 포인트에서 4방향으로 전파할 수 있다
+    for r, c in route:
+        for i in range(4):
+            nr = r + dr[i]
+            nc = c + dc[i]
+            # 범위 바깥이거나 이미 방문한 곳
+            if not (0 <= nr < 5 and 0 <= nc < 5) or ((nr, nc) in route):
+                continue
+            # 갈 수 있는 곳
+            if IN[nr][nc] == 'Y':
+                dfs(route + [(nr, nc)], Y_member + 1)
+            else:
+                dfs(route + [(nr, nc)], Y_member)
+
+
+IN = [list(input()) for _ in range(5)]
+result = 0
+route_check = set()
+
+for r in range(5):
+    for c in range(5):
+        Y_member = 1 if IN[r][c] == 'Y' else 0
+        dfs([(r, c)], Y_member)
+
+print(result)
